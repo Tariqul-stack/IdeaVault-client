@@ -25,7 +25,9 @@ function GoogleIcon() {
   );
 }
 
-export default function SocialLoginButton() {
+export default function SocialLoginButton({
+  label = "Continue with Google",
+}) {
   return (
     <motion.button
       type="button"
@@ -35,7 +37,7 @@ export default function SocialLoginButton() {
       className="flex h-14 w-full items-center justify-center gap-3 rounded-2xl border border-[var(--auth-social-border)] bg-[var(--auth-social-bg)] px-4 text-base font-semibold text-[var(--auth-foreground)] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] transition-all duration-300 hover:border-[var(--auth-social-border-hover)] hover:bg-[var(--auth-social-bg-hover)]"
     >
       <GoogleIcon />
-      <span>Continue with Google</span>
+      <span>{label}</span>
     </motion.button>
   );
 }
