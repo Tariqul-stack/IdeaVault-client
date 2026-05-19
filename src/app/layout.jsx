@@ -1,10 +1,10 @@
-import { Geist, Space_Grotesk } from "next/font/google";
+import { DM_Sans, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/navbar/Navbar";
 import ThemeProvider from "../components/theme/ThemeProvider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
 });
 
@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${spaceGrotesk.variable} antialiased`}
+        className={`${dmSans.className} ${dmSans.variable} ${spaceGrotesk.variable} antialiased`}
       >
         <ThemeProvider>
           <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">

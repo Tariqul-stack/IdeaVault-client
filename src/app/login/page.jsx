@@ -1,16 +1,14 @@
-import { Sparkles } from "lucide-react";
+import LoginForm from "../../components/auth/LoginForm";
 
 export default function LoginPage() {
   return (
-    <section className="flex min-h-[calc(100vh-10rem)] items-center justify-center px-4 py-16 sm:px-6 lg:px-8">
-      <div className="hero-panel flex w-full max-w-3xl flex-col items-center justify-center gap-5 rounded-[2rem] px-8 py-16 text-center">
-        <div className="inline-flex items-center gap-2 rounded-full border border-[var(--nav-border)] bg-[var(--nav-surface-soft)] px-4 py-2 text-sm font-semibold text-[var(--nav-foreground-muted)]">
-          <Sparkles className="h-4 w-4 text-[var(--nav-accent)]" />
-          Secure access to your vault
-        </div>
-        <h1 className="text-4xl font-black tracking-[-0.05em] text-[var(--nav-brand)] sm:text-6xl">
-          Login Page
-        </h1>
+    <section className="relative grid min-h-[calc(100vh-6.5rem)] place-items-center overflow-hidden px-4 py-10 sm:px-6 md:px-8 md:py-14 lg:px-8">
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,11,18,0.06),rgba(11,11,18,0))] dark:bg-[linear-gradient(180deg,rgba(6,7,14,0.78),rgba(6,7,14,0.92))]" />
+      <div className="absolute left-[8%] top-[12%] h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(130,92,255,0.16),transparent_68%)] blur-3xl dark:bg-[radial-gradient(circle,rgba(130,92,255,0.22),transparent_68%)]" />
+      <div className="absolute bottom-[10%] right-[7%] h-64 w-64 rounded-full bg-[radial-gradient(circle,rgba(110,86,255,0.1),transparent_70%)] blur-3xl dark:bg-[radial-gradient(circle,rgba(110,86,255,0.16),transparent_70%)]" />
+
+      <div className="relative flex w-full justify-center">
+        <LoginForm />
       </div>
     </section>
   );

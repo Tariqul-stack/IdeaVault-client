@@ -71,11 +71,11 @@ export default function Navbar() {
               href="/"
               className="inline-flex items-center gap-3 rounded-2xl pr-3 transition-transform duration-300 hover:scale-[1.01]"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#8b76ff_0%,#6e56ff_100%)] text-base font-black tracking-[0.18em] text-white shadow-[0_16px_28px_rgba(110,86,255,0.4)]">
+              <div className="font-display flex h-12 w-12 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#8b76ff_0%,#6e56ff_100%)] text-base font-black tracking-[0.18em] text-white shadow-[0_16px_28px_rgba(110,86,255,0.4)]">
                 IV
               </div>
               <div className="flex flex-col">
-                <span className="text-[1.55rem] font-black tracking-[-0.04em] text-[var(--nav-brand)] sm:text-[1.8rem]">
+                <span className="font-display text-[1.55rem] font-black tracking-[-0.04em] text-[var(--nav-brand)] sm:text-[1.8rem]">
                   IdeaVault
                 </span>
               </div>

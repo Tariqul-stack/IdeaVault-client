@@ -8,7 +8,7 @@ export default function RegisterPage() {
           <Sparkles className="h-4 w-4 text-[var(--nav-accent)]" />
           Create your space for bold ideas
         </div>
-        <h1 className="text-4xl font-black tracking-[-0.05em] text-[var(--nav-brand)] sm:text-6xl">
+        <h1 className="font-display text-4xl font-black tracking-[-0.05em] text-[var(--nav-brand)] sm:text-6xl">
           Register Page
         </h1>
       </div>

@@ -7,8 +7,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-sans);
+  --font-sans: var(--font-dm-sans);
+  --font-mono: var(--font-dm-sans);
   --font-heading: var(--font-space-grotesk);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -94,6 +94,27 @@
   --nav-foreground-muted: #5f6980;
   --nav-brand: #080b17;
   --nav-accent: #6e56ff;
+  --stats-value: #161b2d;
+  --stats-label: #6b7389;
+  --stats-divider: rgba(95, 108, 140, 0.14);
+  --stats-grid: rgba(95, 108, 140, 0.06);
+  --auth-card-bg: rgba(255, 255, 255, 0.72);
+  --auth-card-border: rgba(255, 255, 255, 0.72);
+  --auth-heading: #161b2d;
+  --auth-foreground: #161b2d;
+  --auth-label: #3f465b;
+  --auth-muted: #6b7389;
+  --auth-placeholder: #8d94ab;
+  --auth-accent: #7c3aed;
+  --auth-accent-strong: #6d28d9;
+  --auth-accent-soft: #7a5ce8;
+  --auth-input-bg: rgba(246, 248, 252, 0.9);
+  --auth-input-border: rgba(95, 108, 140, 0.18);
+  --auth-divider: rgba(95, 108, 140, 0.18);
+  --auth-social-bg: rgba(255, 255, 255, 0.5);
+  --auth-social-bg-hover: rgba(255, 255, 255, 0.72);
+  --auth-social-border: rgba(95, 108, 140, 0.18);
+  --auth-social-border-hover: rgba(124, 92, 255, 0.28);
 }
 
 .dark {
@@ -141,6 +162,27 @@
   --nav-foreground-muted: #a0a5bd;
   --nav-brand: #ffffff;
   --nav-accent: #7c5cff;
+  --stats-value: #f4f3ff;
+  --stats-label: #9ea5be;
+  --stats-divider: rgba(255, 255, 255, 0.08);
+  --stats-grid: rgba(255, 255, 255, 0.03);
+  --auth-card-bg: rgba(17, 17, 27, 0.75);
+  --auth-card-border: rgba(255, 255, 255, 0.08);
+  --auth-heading: #f5f7ff;
+  --auth-foreground: #f5f7ff;
+  --auth-label: #b0b5c9;
+  --auth-muted: #8f94aa;
+  --auth-placeholder: #656b82;
+  --auth-accent: #a78bfa;
+  --auth-accent-strong: #c4b5fd;
+  --auth-accent-soft: #b79cff;
+  --auth-input-bg: rgba(6, 7, 14, 0.92);
+  --auth-input-border: rgba(255, 255, 255, 0.08);
+  --auth-divider: rgba(255, 255, 255, 0.08);
+  --auth-social-bg: rgba(255, 255, 255, 0.02);
+  --auth-social-bg-hover: rgba(255, 255, 255, 0.04);
+  --auth-social-border: rgba(255, 255, 255, 0.1);
+  --auth-social-border-hover: rgba(167, 139, 250, 0.28);
 }
 
 @layer base {
@@ -171,6 +213,14 @@
 }
 
 @layer utilities {
+  .font-display {
+    font-family: "Space Grotesk", sans-serif;
+  }
+
+  .font-ui {
+    font-family: "DM Sans", sans-serif;
+  }
+
   .hero-panel {
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
