@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Layers3, Sparkles, Stars } from "lucide-react";
+import HeroCarousel from "@/components/home/HeroCarousel";
 import StatsSection from "../components/home/StatsSection";
 
 export default function Home() {
@@ -98,6 +99,9 @@ export default function Home() {
       </section>
 
       <StatsSection />
+      <section className="pb-8 pt-8">
+        <HeroCarousel />
+      </section>
     </>
   );
 }
