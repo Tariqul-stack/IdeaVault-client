@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useSession } from "@/lib/auth-client";
 import axiosInstance from "@/lib/axios";
+import toast from "react-hot-toast";
 import {
   RiLightbulbLine,
   RiApps2Line,
@@ -52,7 +53,6 @@ export default function AddIdeaPage() {
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState("");
 
   useEffect(() => {
     if (!isPending && !session) {
@@ -93,7 +93,6 @@ export default function AddIdeaPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitError("");
 
     if (!validate()) {
       return;
@@ -116,11 +115,11 @@ export default function AddIdeaPage() {
       };
 
       await axiosInstance.post("/api/ideas", payload);
-      alert("Idea submitted successfully!");
+      toast.success("Idea submitted successfully! 🚀");
       router.push("/ideas");
     } catch (err) {
       console.error(err);
-      setSubmitError("Failed to submit idea. Please try again.");
+      toast.error("Failed to submit idea. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -203,12 +202,6 @@ export default function AddIdeaPage() {
         <div className="absolute right-8 top-8 rounded-full border border-purple-500/20 bg-purple-500/10 px-3 py-1 text-xs uppercase tracking-widest text-purple-400">
           PRIVATE ROUTE
         </div>
-
-        {submitError && (
-          <div className="mb-6 rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-500">
-            {submitError}
-          </div>
-        )}
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
           {/* Row 1 */}
