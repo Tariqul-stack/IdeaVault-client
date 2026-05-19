@@ -14,6 +14,8 @@ import {
   Sparkles,
   UserRound,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { signUp, signIn } from "@/lib/auth-client";
 import AuthDivider from "./AuthDivider";
 import AuthInput from "./AuthInput";
 import PasswordRequirements from "./PasswordRequirements";
@@ -35,13 +37,39 @@ export default function RegisterForm() {
     );
   }, [password]);
 
+  const router = useRouter();
+  const [error, setError] = useState("");
+
   async function handleSubmit(event) {
     event.preventDefault();
+    if (!isPasswordValid) return;
+    
+    setError("");
     setIsLoading(true);
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const { error: authError } = await signUp.email({
+      email,
+      password,
+      name: fullName,
+      image: photoUrl,
+    });
 
-    setIsLoading(false);
+    if (authError) {
+      setError(authError.message || "Failed to create account.");
+      setIsLoading(false);
+    } else {
+      router.push("/");
+      router.refresh();
+    }
+  }
+
+  async function handleGoogleSignUp() {
+    setError("");
+    setIsLoading(true);
+    await signIn.social({
+      provider: "google",
+      callbackURL: "/",
+    });
   }
 
   return (
@@ -73,6 +101,12 @@ export default function RegisterForm() {
             </p>
           </div>
         </div>
+
+        {error && (
+          <div className="mb-5 rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-500 dark:border-red-500/30 dark:bg-red-500/15">
+            {error}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-4.5">
           <div className="grid gap-4 md:grid-cols-2">
@@ -163,7 +197,7 @@ export default function RegisterForm() {
 
           <AuthDivider label="or" />
 
-          <SocialLoginButton label="Sign up with Google" />
+          <SocialLoginButton label="Sign up with Google" onClick={handleGoogleSignUp} disabled={isLoading} />
 
           <p className="pt-1 text-center text-sm text-[var(--auth-muted)] sm:text-base">
             Already have an account?{" "}

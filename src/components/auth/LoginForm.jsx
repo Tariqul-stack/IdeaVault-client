@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { signIn } from "@/lib/auth-client";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -22,13 +24,35 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  const router = useRouter();
+  const [error, setError] = useState("");
+
   async function handleSubmit(event) {
     event.preventDefault();
+    setError("");
     setIsLoading(true);
 
-    await new Promise((resolve) => setTimeout(resolve, 900));
+    const { error: authError } = await signIn.email({
+      email,
+      password,
+    });
 
-    setIsLoading(false);
+    if (authError) {
+      setError(authError.message || "Failed to sign in. Please check your credentials.");
+      setIsLoading(false);
+    } else {
+      router.push("/");
+      router.refresh();
+    }
+  }
+
+  async function handleGoogleSignIn() {
+    setError("");
+    setIsLoading(true);
+    await signIn.social({
+      provider: "google",
+      callbackURL: "/",
+    });
   }
 
   return (
@@ -60,6 +84,12 @@ export default function LoginForm() {
             </p>
           </div>
         </div>
+
+        {error && (
+          <div className="mb-5 rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-500 dark:border-red-500/30 dark:bg-red-500/15">
+            {error}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <AuthInput
@@ -127,7 +157,7 @@ export default function LoginForm() {
 
           <AuthDivider />
 
-          <SocialLoginButton />
+          <SocialLoginButton onClick={handleGoogleSignIn} disabled={isLoading} />
 
           <p className="text-center text-sm text-[var(--auth-muted)] sm:text-base">
             Don&apos;t have an account?{" "}

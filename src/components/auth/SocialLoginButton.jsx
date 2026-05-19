@@ -27,14 +27,18 @@ function GoogleIcon() {
 
 export default function SocialLoginButton({
   label = "Continue with Google",
+  onClick,
+  disabled,
 }) {
   return (
     <motion.button
       type="button"
-      whileHover={{ y: -2, scale: 1.01 }}
-      whileTap={{ scale: 0.99 }}
+      onClick={onClick}
+      disabled={disabled}
+      whileHover={disabled ? {} : { y: -2, scale: 1.01 }}
+      whileTap={disabled ? {} : { scale: 0.99 }}
       transition={{ duration: 0.2 }}
-      className="flex h-14 w-full items-center justify-center gap-3 rounded-2xl border border-[var(--auth-social-border)] bg-[var(--auth-social-bg)] px-4 text-base font-semibold text-[var(--auth-foreground)] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] transition-all duration-300 hover:border-[var(--auth-social-border-hover)] hover:bg-[var(--auth-social-bg-hover)]"
+      className="flex h-14 w-full items-center justify-center gap-3 rounded-2xl border border-[var(--auth-social-border)] bg-[var(--auth-social-bg)] px-4 text-base font-semibold text-[var(--auth-foreground)] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] transition-all duration-300 hover:border-[var(--auth-social-border-hover)] hover:bg-[var(--auth-social-bg-hover)] disabled:opacity-70 disabled:cursor-not-allowed"
     >
       <GoogleIcon />
       <span>{label}</span>
