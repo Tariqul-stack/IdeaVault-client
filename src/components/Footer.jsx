@@ -89,8 +89,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 items-start gap-10 py-12 md:grid-cols-4 md:py-16">
           <div>
             <div className="mb-4 flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-purple-600">
-                <span className="font-bold text-sm text-white">IV</span>
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[linear-gradient(135deg,#8b76ff_0%,#6e56ff_100%)] text-base font-black tracking-[0.18em] text-white shadow-[0_16px_28px_rgba(110,86,255,0.4)]">
+                <span className="font-bold text-sm text-white ">IV</span>
               </div>
               <span className="font-display text-xl font-bold text-gray-900 dark:text-white">
                 IdeaVault
