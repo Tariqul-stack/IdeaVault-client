@@ -115,7 +115,7 @@ export default function AddIdeaPage() {
       };
 
       await axiosInstance.post("/api/ideas", payload);
-      toast.success("Idea submitted successfully! 🚀");
+      toast.success("Idea submitted successfully!");
       router.push("/ideas");
     } catch (err) {
       console.error(err);
