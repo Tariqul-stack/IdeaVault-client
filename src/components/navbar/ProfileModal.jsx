@@ -1,9 +1,12 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 
 export default function ProfileModal({ isOpen, onClose, user, onLogout }) {
+  const router = useRouter();
+
   if (!user) return null;
 
   return (
@@ -58,8 +61,8 @@ export default function ProfileModal({ isOpen, onClose, user, onLogout }) {
             <div className="flex flex-col gap-3">
               <button
                 onClick={() => {
-                  console.log("Update Profile clicked");
                   onClose();
+                  router.push("/update-profile");
                 }}
                 className="w-full rounded-2xl bg-[linear-gradient(135deg,#8b76ff_0%,#6e56ff_100%)] py-3 text-sm font-semibold text-white shadow-[0_16px_36px_rgba(112,86,255,0.38)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_44px_rgba(112,86,255,0.48)]"
               >
