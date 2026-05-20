@@ -5,6 +5,8 @@ import StatsSection from "../components/home/StatsSection";
 import TrendingIdeas from "@/components/home/TrendingIdeas";
 import HowItWorks from "@/components/home/HowItWorks";
 import CategoriesSection from "@/components/home/CategoriesSection";
+import AddIdeaSection from "@/components/home/AddIdeaSection";
+import FeaturedIdea from "@/components/home/FeaturedIdea";
 
 export default function Home() {
   return (
@@ -108,6 +110,8 @@ export default function Home() {
       <TrendingIdeas />
       <HowItWorks />
       <CategoriesSection />
+      <AddIdeaSection />
+      <FeaturedIdea />
     </>
   );
 }
