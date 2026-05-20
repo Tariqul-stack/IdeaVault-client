@@ -4,6 +4,7 @@ import HeroCarousel from "@/components/home/HeroCarousel";
 import StatsSection from "../components/home/StatsSection";
 import TrendingIdeas from "@/components/home/TrendingIdeas";
 import HowItWorks from "@/components/home/HowItWorks";
+import CategoriesSection from "@/components/home/CategoriesSection";
 
 export default function Home() {
   return (
@@ -106,6 +107,7 @@ export default function Home() {
       </section>
       <TrendingIdeas />
       <HowItWorks />
+      <CategoriesSection />
     </>
   );
 }
