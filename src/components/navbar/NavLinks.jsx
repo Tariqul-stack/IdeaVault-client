@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
+import { useSession } from "@/lib/auth-client";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -10,6 +11,7 @@ const navItems = [
   { href: "/add-idea", label: "Add Idea", showDot: true },
   { href: "/my-ideas", label: "My Ideas", showDot: true },
   { href: "/my-interactions", label: "My Interactions", showDot: true },
+  { href: "/my-bookmarks", label: "My Bookmarks", showDot: true },
 ];
 
 function getIsActive(pathname, href) {
@@ -22,6 +24,14 @@ function getIsActive(pathname, href) {
 
 export default function NavLinks({ mobile = false, onNavigate }) {
   const pathname = usePathname();
+  const { data: session } = useSession();
+
+  const visibleItems = navItems.filter((item) => {
+    if (item.showDot) {
+      return !!session;
+    }
+    return true;
+  });
 
   return (
     <div
@@ -31,7 +41,7 @@ export default function NavLinks({ mobile = false, onNavigate }) {
           : "hidden items-center gap-2 lg:flex"
       }
     >
-      {navItems.map((item, index) => {
+      {visibleItems.map((item, index) => {
         const isActive = getIsActive(pathname, item.href);
 
         return (
