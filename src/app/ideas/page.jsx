@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import axiosInstance from "@/lib/axios";
 import { Search, SlidersHorizontal, Clock, MessageSquare, ChevronDown } from "lucide-react";
+import IdeaCard from "@/components/ideas/IdeaCard";
 
 const CATEGORIES = [
   "All Categories",
@@ -216,69 +217,7 @@ export default function IdeasPage() {
         {!loading && ideas.length > 0 && (
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {ideas.map((idea, index) => (
-              <motion.div
-                key={idea._id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-                whileHover={{ y: -4 }}
-                onClick={() => router.push(`/ideas/${idea._id}`)}
-                className="group flex cursor-pointer flex-col gap-4 rounded-3xl border border-[var(--nav-shell-border)] bg-[var(--nav-shell)] p-6 transition-all duration-300 hover:border-purple-500/30 hover:shadow-[0_8px_32px_rgba(139,118,255,0.12)]"
-              >
-                {/* CARD TOP ROW */}
-                <div className="flex justify-between items-center">
-                  <span className={`rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-wider ${getCategoryColor(idea.category)}`}>
-                    {truncateCategory(idea.category)}
-                  </span>
-                  <div className="flex items-center gap-1">
-                    <Clock size={12} className="text-[var(--nav-foreground-muted)]" />
-                    <span className="text-xs text-[var(--nav-foreground-muted)]">
-                      {timeAgo(idea.createdAt)}
-                    </span>
-                  </div>
-                </div>
-
-                {/* CARD TITLE */}
-                <h3 className="line-clamp-2 text-lg font-bold leading-snug text-[var(--nav-foreground-strong)] transition-colors duration-200 group-hover:text-purple-400">
-                  {idea.title}
-                </h3>
-
-                {/* CARD DESCRIPTION */}
-                <p className="line-clamp-2 text-sm leading-relaxed text-[var(--nav-foreground-muted)]">
-                  {idea.shortDescription}
-                </p>
-
-                {/* CARD BOTTOM */}
-                <div className="mt-auto flex items-center justify-between border-t border-[var(--nav-shell-border)] pt-4">
-                  <div className="flex items-center gap-2">
-                    {idea.authorImage ? (
-                      <img
-                        src={idea.authorImage}
-                        alt={idea.authorName || "Author"}
-                        className="h-7 w-7 rounded-full object-cover"
-                        referrerPolicy="no-referrer"
-                      />
-                    ) : (
-                      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-purple-600 text-xs font-bold text-white">
-                        {idea.authorName ? idea.authorName[0].toUpperCase() : "U"}
-                      </div>
-                    )}
-                    <span className="text-sm font-medium text-[var(--nav-foreground-strong)]">
-                      {idea.authorName || "Anonymous"}
-                    </span>
-                  </div>
-
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      router.push(`/ideas/${idea._id}`);
-                    }}
-                    className="rounded-xl border border-[var(--nav-shell-border)] bg-[var(--nav-surface-soft)] px-4 py-2 text-xs font-semibold text-[var(--nav-foreground-muted)] transition-all duration-200 hover:border-purple-500/40 hover:bg-purple-500/10 hover:text-purple-400"
-                  >
-                    View Details
-                  </button>
-                </div>
-              </motion.div>
+              <IdeaCard key={idea._id} idea={idea} index={index} />
             ))}
           </div>
         )}
