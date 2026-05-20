@@ -36,6 +36,9 @@ export default function FullIdeaView() {
   
   const commentInputRef = useRef(null);
 
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [bookmarkLoading, setBookmarkLoading] = useState(false);
+
   // Fetch idea
   useEffect(() => {
     const fetchIdea = async () => {
@@ -66,6 +69,21 @@ export default function FullIdeaView() {
     };
     if (id) fetchComments();
   }, [id]);
+
+  useEffect(() => {
+    if (!session || !id) return;
+    const checkBookmark = async () => {
+      try {
+        const res = await axiosInstance.get(
+          `/api/bookmarks/${id}/bookmark/check`
+        );
+        setIsBookmarked(res.data.bookmarked);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    checkBookmark();
+  }, [session, id]);
 
   const handleSubmitComment = async () => {
     if (!session) {
@@ -125,6 +143,29 @@ export default function FullIdeaView() {
       toast.error("Failed to delete");
     } finally {
       setDeleting(false);
+    }
+  };
+
+  const handleBookmark = async () => {
+    if (!session) {
+      toast.error("Please login to bookmark");
+      return;
+    }
+    setBookmarkLoading(true);
+    try {
+      const res = await axiosInstance.post(
+        `/api/bookmarks/${id}/bookmark`
+      );
+      setIsBookmarked(res.data.bookmarked);
+      if (res.data.bookmarked) {
+        toast.success("Idea bookmarked! 🔖");
+      } else {
+        toast.success("Bookmark removed");
+      }
+    } catch (err) {
+      toast.error("Failed to update bookmark");
+    } finally {
+      setBookmarkLoading(false);
     }
   };
 
@@ -603,11 +644,23 @@ export default function FullIdeaView() {
                 Join Discussion
               </button>
               <button
-                onClick={() => toast.success("Bookmarked! (coming soon)")}
-                className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[var(--nav-shell-border)] bg-[var(--nav-surface-soft)] py-3 text-sm font-semibold text-[var(--nav-foreground-muted)] transition-all duration-200 hover:border-violet-500/40 hover:text-violet-400"
+                onClick={handleBookmark}
+                disabled={bookmarkLoading}
+                className={`w-full flex items-center justify-center gap-2 rounded-2xl border py-3 text-sm font-semibold transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed ${
+                  isBookmarked
+                    ? "border-violet-500/40 bg-violet-500/10 text-violet-400 hover:bg-violet-500/15"
+                    : "border-[var(--nav-shell-border)] bg-[var(--nav-surface-soft)] text-[var(--nav-foreground-muted)] hover:border-violet-500/40 hover:text-violet-400"
+                }`}
               >
-                <Bookmark size={16} />
-                Bookmark Idea
+                {bookmarkLoading ? (
+                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                ) : (
+                  <Bookmark
+                    size={16}
+                    className={isBookmarked ? "fill-violet-400" : ""}
+                  />
+                )}
+                {isBookmarked ? "Bookmarked" : "Bookmark Idea"}
               </button>
             </div>
           </div>
