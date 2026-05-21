@@ -3,9 +3,11 @@
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Clock } from "lucide-react";
+import { useSession } from "@/lib/auth-client";
 
 export default function IdeaCard({ idea, index = 0 }) {
   const router = useRouter();
+  const { data: session } = useSession();
 
   const timeAgo = (date) => {
     const seconds = Math.floor((new Date() - new Date(date)) / 1000);
@@ -46,7 +48,13 @@ export default function IdeaCard({ idea, index = 0 }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
       whileHover={{ y: -4 }}
-      onClick={() => router.push(`/ideas/${idea._id}`)}
+      onClick={() => {
+        if (!session) {
+          router.push("/login");
+          return;
+        }
+        router.push(`/ideas/${idea._id}`);
+      }}
       className="group flex cursor-pointer flex-col gap-4 rounded-3xl border border-[var(--nav-shell-border)] bg-[var(--nav-shell)] p-6 transition-all duration-300 hover:border-purple-500/30 hover:shadow-[0_8px_32px_rgba(139,118,255,0.12)]"
     >
       {/* CARD TOP ROW */}
@@ -95,6 +103,10 @@ export default function IdeaCard({ idea, index = 0 }) {
         <button
           onClick={(e) => {
             e.stopPropagation();
+            if (!session) {
+              router.push("/login");
+              return;
+            }
             router.push(`/ideas/${idea._id}`);
           }}
           className="rounded-xl border border-[var(--nav-shell-border)] bg-[var(--nav-surface-soft)] px-4 py-2 text-xs font-semibold text-[var(--nav-foreground-muted)] transition-all duration-200 hover:border-purple-500/40 hover:bg-purple-500/10 hover:text-purple-400"

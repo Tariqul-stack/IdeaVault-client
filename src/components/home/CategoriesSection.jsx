@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import axiosInstance from "@/lib/axios";
+import { useSession } from "@/lib/auth-client";
 import {
   RiRobot2Line,
   RiHeartPulseLine,
@@ -112,6 +113,7 @@ const CATEGORIES_CONFIG = [
 
 export default function CategoriesSection() {
   const router = useRouter();
+  const { data: session } = useSession();
   const [stats, setStats] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -188,9 +190,13 @@ export default function CategoriesSection() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.06, duration: 0.4 }}
-                  onClick={() =>
-                    router.push(`/ideas?category=${encodeURIComponent(cat.name)}`)
-                  }
+                  onClick={() => {
+                    if (!session) {
+                      router.push("/login");
+                      return;
+                    }
+                    router.push(`/ideas?category=${encodeURIComponent(cat.name)}`);
+                  }}
                   className={`group flex cursor-pointer flex-col items-center rounded-3xl border border-[var(--nav-shell-border)] bg-[var(--nav-shell)] p-6 text-center transition-all duration-300 ${cat.cardBorder} ${cat.cardGlow} hover:-translate-y-1`}
                 >
                   {/* Icon Box */}
