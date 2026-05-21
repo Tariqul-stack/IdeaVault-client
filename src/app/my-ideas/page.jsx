@@ -153,11 +153,6 @@ export default function MyIdeasPage() {
   });
   const [deleting, setDeleting] = useState(false);
 
-  useEffect(() => {
-    if (!isPending && !session) {
-      router.push("/login");
-    }
-  }, [session, isPending, router]);
 
   useEffect(() => {
     if (!session) return;
@@ -220,6 +215,7 @@ export default function MyIdeasPage() {
   }
 
   if (!session) {
+    router.push("/login");
     return null;
   }
 
