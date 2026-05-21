@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { signUp, signIn } from "@/lib/auth-client";
+import toast from "react-hot-toast";
 import AuthDivider from "./AuthDivider";
 import AuthInput from "./AuthInput";
 import PasswordRequirements from "./PasswordRequirements";
@@ -55,9 +56,32 @@ export default function RegisterForm() {
     });
 
     if (authError) {
-      setError(authError.message || "Failed to create account.");
+      const message = authError.message || "Failed to create account.";
+      setError(message);
+      toast.error(message, {
+        duration: 4000,
+        style: {
+          borderRadius: "14px",
+          background: "var(--nav-shell)",
+          color: "var(--nav-foreground-strong)",
+          border: "1px solid var(--nav-shell-border)",
+        },
+      });
       setIsLoading(false);
     } else {
+      toast.success("Account created! Welcome to IdeaVault 🎉", {
+        duration: 4000,
+        style: {
+          borderRadius: "14px",
+          background: "var(--nav-shell)",
+          color: "var(--nav-foreground-strong)",
+          border: "1px solid var(--nav-shell-border)",
+        },
+        iconTheme: {
+          primary: "#14b8a6",
+          secondary: "#fff",
+        },
+      });
       router.push("/");
       router.refresh();
     }

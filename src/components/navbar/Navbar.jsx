@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSession, signOut } from "@/lib/auth-client";
 import { ArrowRight, Menu, X } from "lucide-react";
+import toast from "react-hot-toast";
 import NavLinks from "./NavLinks";
 import ThemeToggle from "../theme/ThemeToggle";
 import ProfileModal from "../navbar/ProfileModal";
@@ -31,15 +32,28 @@ function AuthLinks({ mobile = false, onNavigate, session, isPending, onAvatarCli
       ) : session?.user ? (
         <div className={mobile ? "flex w-full justify-center" : "flex items-center"}>
           {session.user.image ? (
-            <img
-              src={session.user.image}
-              alt={session.user.name || "User"}
+            <div
+              className="relative h-10 w-10 cursor-pointer"
               onClick={() => {
                 onAvatarClick();
                 if (onNavigate) onNavigate();
               }}
-              className="h-10 w-10 cursor-pointer rounded-full object-cover ring-2 ring-[var(--nav-border-strong)] transition-all duration-300 hover:ring-purple-500"
-            />
+            >
+              {/* Initials shown behind image while loading */}
+              <div className="absolute inset-0 flex items-center justify-center rounded-full bg-gradient-to-br from-[#8b76ff] to-[#6e56ff] text-sm font-bold text-white ring-2 ring-[var(--nav-border-strong)]">
+                {session.user.name ? session.user.name[0].toUpperCase() : "U"}
+              </div>
+
+              {/* Image starts hidden, shows after load */}
+              <img
+                src={session.user.image}
+                alt={session.user.name || "User"}
+                referrerPolicy="no-referrer"
+                onLoad={(e) => (e.target.style.opacity = "1")}
+                className="absolute inset-0 h-10 w-10 rounded-full object-cover ring-2 ring-[var(--nav-border-strong)] transition-opacity duration-300 hover:ring-purple-500"
+                style={{ opacity: 0 }}
+              />
+            </div>
           ) : (
             <div
               onClick={() => {
@@ -97,8 +111,23 @@ export default function Navbar() {
     await signOut({
       fetchOptions: {
         onSuccess: () => {
-          router.push("/login");
-          router.refresh();
+          toast.success("Logged out successfully.", {
+            duration: 3000,
+            style: {
+              borderRadius: "14px",
+              background: "#1e1e2a",
+              color: "#f0f0ff",
+              border: "1px solid rgba(255,255,255,0.1)",
+            },
+            iconTheme: {
+              primary: "#8b76ff",
+              secondary: "#fff",
+            },
+          });
+          setTimeout(() => {
+            router.push("/login");
+            router.refresh();
+          }, 800);
         },
       },
     });

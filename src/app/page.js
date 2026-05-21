@@ -16,7 +16,7 @@ export default function Home() {
           <div className="space-y-8">
             <div className="inline-flex items-center gap-2 rounded-full border border-[var(--nav-border)] bg-[var(--nav-surface-soft)] px-4 py-2 text-sm font-semibold text-[var(--nav-foreground-muted)] shadow-[0_12px_32px_rgba(15,23,42,0.08)]">
               <Sparkles className="h-4 w-4 text-[var(--nav-accent)]" />
-              Turn scattered thoughts into products worth building
+              The future of startup ideation
             </div>
 
             <div className="space-y-5">

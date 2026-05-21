@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useSession } from "@/lib/auth-client";
@@ -37,9 +37,7 @@ const CATEGORIES = [
 ];
 
 export default function AddIdeaSection() {
-  const router = useRouter();
-  const { data: session, isPending } = useSession();
-
+  const [mounted, setMounted] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     category: "",
@@ -52,13 +50,18 @@ export default function AddIdeaSection() {
     coverImageUrl: "",
     tags: "",
   });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
 
-  if (isPending) {
-    return null;
-  }
+  const router = useRouter();
+  const { data: session, isPending } = useSession();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+  if (isPending) return null;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
