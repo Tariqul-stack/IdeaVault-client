@@ -53,6 +53,8 @@
   --foreground: #101323;
   --card: #ffffff;
   --card-foreground: #101323;
+  --card-shadow-light: 0 2px 16px rgba(95, 108, 140, 0.12);
+  --card-border-light: rgba(95, 108, 140, 0.20);
   --popover: #ffffff;
   --popover-foreground: #101323;
   --primary: #6e56ff;
@@ -81,14 +83,14 @@
   --sidebar-accent-foreground: #101323;
   --sidebar-border: rgba(95, 108, 140, 0.18);
   --sidebar-ring: rgba(110, 86, 255, 0.34);
-  --nav-shell: rgba(255, 255, 255, 0.7);
-  --nav-shell-border: rgba(255, 255, 255, 0.72);
+  --nav-shell: rgba(255, 255, 255, 0.95);
+  --nav-shell-border: rgb(95, 108, 140);
   --nav-shell-divider: rgba(95, 108, 140, 0.16);
-  --nav-surface-soft: rgba(255, 255, 255, 0.7);
-  --nav-surface-strong: rgba(245, 247, 252, 0.88);
+  --nav-surface-soft: rgba(241, 244, 250, 0.9);
+  --nav-surface-strong: rgba(235, 239, 248, 0.95);
   --nav-pill: rgba(110, 86, 255, 0.08);
   --nav-pill-active: rgba(110, 86, 255, 0.12);
-  --nav-border: rgba(95, 108, 140, 0.18);
+  --nav-border: rgba(95, 108, 140, 0.284);
   --nav-border-strong: rgba(110, 86, 255, 0.28);
   --nav-foreground-strong: #101323;
   --nav-foreground-muted: #5f6980;

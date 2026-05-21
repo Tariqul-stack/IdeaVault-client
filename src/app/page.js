@@ -8,6 +8,11 @@ import CategoriesSection from "@/components/home/CategoriesSection";
 import AddIdeaSection from "@/components/home/AddIdeaSection";
 import FeaturedIdea from "@/components/home/FeaturedIdea";
 
+export const metadata = {
+  title: "IdeaVault — Where Startup Ideas Come to Life",
+  description: "Share your vision, discover trending concepts.",
+};
+
 export default function Home() {
   return (
     <>

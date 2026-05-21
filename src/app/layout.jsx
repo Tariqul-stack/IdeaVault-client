@@ -16,7 +16,10 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata = {
-  title: "IdeaVault",
+  title: {
+    default: "IdeaVault",
+    template: "%s | IdeaVault",
+  },
   description: "Share and discover startup ideas.",
 };
 
@@ -27,7 +30,7 @@ export default function RootLayout({ children }) {
         className={`${dmSans.className} ${dmSans.variable} ${spaceGrotesk.variable} antialiased`}
       >
         <ThemeProvider>
-          <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
+          <div className="relative min-h-screen bg-background text-foreground">
             <Navbar />
             <Toaster
               position="top-right"

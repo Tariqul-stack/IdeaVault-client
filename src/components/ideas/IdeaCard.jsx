@@ -55,7 +55,7 @@ export default function IdeaCard({ idea, index = 0 }) {
         }
         router.push(`/ideas/${idea._id}`);
       }}
-      className="group flex cursor-pointer flex-col gap-4 rounded-3xl border border-[var(--nav-shell-border)] bg-[var(--nav-shell)] p-6 transition-all duration-300 hover:border-purple-500/30 hover:shadow-[0_8px_32px_rgba(139,118,255,0.12)]"
+      className="group flex cursor-pointer flex-col gap-4 rounded-3xl border border-[var(--nav-shell-border)] bg-[var(--nav-shell)] p-6 transition-all duration-300 hover:border-purple-500/30 hover:shadow-[0_8px_32px_rgba(139,118,255,0.12)] shadow-[0_2px_16px_rgba(110,86,255,0.12)] dark:shadow-none"
     >
       {/* CARD TOP ROW */}
       <div className="flex items-center justify-between">

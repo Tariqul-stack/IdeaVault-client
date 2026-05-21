@@ -4,6 +4,10 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
+export const metadata = {
+  title: "404 — Page Not Found | IdeaVault",
+};
+
 export default function NotFound() {
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#F8F8FC] px-4 dark:bg-[#0B0B12]">
@@ -46,7 +50,8 @@ export default function NotFound() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mb-10 max-w-sm text-sm leading-relaxed text-gray-500 dark:text-white/50 md:text-base"
         >
-          The page you're looking for doesn't exist, was moved, or has been deleted.
+          The page you're looking for doesn't exist, was moved, or has been
+          deleted.
         </motion.p>
 
         {/* Back to Home Button */}
